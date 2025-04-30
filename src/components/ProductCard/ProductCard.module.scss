@@ -1,0 +1,78 @@
+.card {
+  background: var(--white-color);
+  border-radius: 19px;
+  width: 320px;
+  display: block;
+  box-shadow: 18.21px 18.21px 36.43px 0px rgba(211, 209, 216, 0.25);
+}
+
+.head {
+  position: relative;
+  min-height: 165px;
+  border-radius: 20px;
+}
+
+.footer {
+  padding: 12px;
+}
+
+.price {
+  position: absolute;
+  top: 15px;
+  left: 15px;
+  background: var(--white-color);
+  padding: 3px 10px;
+  border-radius: 20px;
+  font-size: 20px;
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  text-decoration: none;
+}
+
+.rating {
+  position: absolute;
+  bottom: 15px;
+  left: 15px;
+  background: var(--white-color);
+  padding: 3px 10px;
+  border-radius: 20px;
+  font-size: 12px;
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  text-decoration: none;
+}
+
+.addToCardBtn {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  background: var(--primary-color);
+  height: 34px;
+  width: 34px;
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  border-radius: 34px;
+  justify-content: center;
+  text-decoration: none;
+}
+
+.addToCardBtn:hover {
+  background: var(--primary-hover-color);
+}
+
+.title {
+  color: var(--text-color);
+  text-decoration: none;
+}
+
+.description {
+  color: var(--text-secondary-color);
+  text-decoration: none;
+}
+
+.currency {
+
+}
