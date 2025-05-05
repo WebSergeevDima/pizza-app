@@ -1,0 +1,40 @@
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.formBtn {
+  justify-content: center;
+  text-transform: uppercase;
+}
+
+.label {
+  color: #C4C4C4;
+  font-size: 17px;
+  font-weight: 400;
+  margin-bottom: 5px;
+  display: block;
+}
+
+.title {
+  margin-bottom: 15px;
+}
+
+.input {
+  color: #C4C4C4;
+}
+
+.footer {
+  font-size: 14px;
+  font-weight: 600;
+  text-align: center;
+  margin-top: 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.link {
+  color: var(--primary-color);
+}
