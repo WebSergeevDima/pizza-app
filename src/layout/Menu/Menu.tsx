@@ -4,11 +4,18 @@ import Button from "../../components/Button/Button.tsx";
 import Menu from "../../components/Menu/Menu.tsx";
 import Header from "../../components/Header/Header.tsx";
 import {CustomRouteObject} from "../../interfaces/menu.interface.ts";
+import {useNavigate} from "react-router-dom";
 
 export default function Layout() {
     const matches = useMatches();
     const currentRoute = matches[matches.length - 1] as CustomRouteObject;
     const title = currentRoute?.handle?.title || 'Страница не найдена';
+    const navigate = useNavigate();
+
+    const logout = () => {
+        localStorage.removeItem('jwt');
+        navigate("/auth/login");
+    }
 
 
     return (
@@ -28,7 +35,7 @@ export default function Layout() {
                     <Menu/>
                 </div>
                 <div className={styles.footer}>
-                    <Button onClick={() => console.log('!')} appearence={'small'}>
+                    <Button onClick={logout} appearence={'small'}>
                         <img src="./src/assets/logout.svg" alt=""/> Выйти
                     </Button>
                 </div>
