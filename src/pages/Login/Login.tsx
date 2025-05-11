@@ -1,14 +1,14 @@
 import Input from "../../components/Input/Input.tsx";
-import {FormEvent, useState} from "react";
+import {FormEvent, useEffect, useState} from "react";
 import Button from "../../components/Button/Button.tsx";
 import styles from './Login.module.scss';
 import Title from "../../components/Title/Title.tsx";
 import {Link} from "react-router";
-import {PREFIX} from "../../helpers/API.ts";
-import axios, {AxiosError} from "axios";
-import {LoginForm, LoginResponse} from "../../interfaces/auth.interface.ts";
+import {LoginForm} from "../../interfaces/auth.interface.ts";
 import {useNavigate} from "react-router-dom";
-import {userActions} from "../../store/user.slice.ts";
+import {useDispatch, useSelector} from "react-redux";
+import {AppDispatchType, RootStateType} from "../../store/store.ts";
+import {login} from "../../store/user.slice.ts";
 
 export default function Login() {
     const navigate = useNavigate();
@@ -17,6 +17,14 @@ export default function Login() {
         password: false,
     });
     const [error, setError] = useState<string | null>();
+    const dispatch = useDispatch<AppDispatchType>();
+    const jwt = useSelector((state: RootStateType) => state.user.jwt);
+
+    useEffect(() => {
+        if (jwt) {
+            navigate("/");
+        }
+    }, [jwt, navigate])
 
     const submit = async (e: FormEvent) => {
         e.preventDefault()
@@ -25,23 +33,23 @@ export default function Login() {
         const target = e.target as typeof e.target & LoginForm;
         const {email, password} = target;
 
-        await sentLogin(email.value, password.value);
+        await sendLogin(email.value, password.value);
     }
 
-    const sentLogin = async (email: string, password: string) => {
-        try {
-            const {data} = await axios.post<LoginResponse>(`${PREFIX}/auth/login`, {
-                email,
-                password
-            })
-            navigate("/");
-            console.log('data: ', data);
-            localStorage.setItem('jwt', JSON.stringify(data.access_token));
-        } catch(e) {
-            if(e instanceof AxiosError) {
-                setError(e.response?.data.message);
-            }
-        }
+    const sendLogin = async (email: string, password: string) => {
+        dispatch(login({email, password}))
+        // try {
+        //     const {data} = await axios.post<LoginResponse>(`${PREFIX}/auth/login`, {
+        //         email,
+        //         password
+        //     })
+        //     dispatch(userActions.addJwt(data.access_token))
+        //     navigate("/");
+        // } catch (e) {
+        //     if (e instanceof AxiosError) {
+        //         setError(e.response?.data.message);
+        //     }
+        // }
     }
 
     return (

@@ -1,4 +1,4 @@
-export function loadState(key: string): string | undefined {
+export function loadState<T>(key: string): T | undefined {
     try {
         const jsonState = localStorage.getItem(key);
 
@@ -6,7 +6,7 @@ export function loadState(key: string): string | undefined {
             return undefined;
         }
 
-        return jsonState;
+        return JSON.parse(jsonState);
     } catch (e) {
         console.error(e);
         return;

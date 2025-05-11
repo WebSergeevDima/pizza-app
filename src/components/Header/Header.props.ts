@@ -1,3 +1,6 @@
+import {ChangeEvent} from "react";
+
 export type HeaderProps = {
-    title: string
+    title: string,
+    updateFilter: (e: ChangeEvent<HTMLInputElement>) => void
 }
